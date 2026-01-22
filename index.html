@@ -1,0 +1,1469 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Amina Ben Nejma — Generative AI for Work & Research</title>
+  <meta name="description" content="One-page portfolio for the Generative AI for Work & Research course." />
+
+  <style>
+    :root{
+      --bg: #ffffff;
+      --surface: #ffffff;
+      --surface-2: #fafafa;
+      --text: #111111;
+      --muted: #5a5a5a;
+      --line: rgba(17,17,17,.10);
+
+      /* Pink accent (Nike-clean + subtle color) */
+      --accent: #ff2ea6;
+      --accent-2: #ff6bc7;
+      --accent-3: #ffb3e1;
+
+      --shadow: 0 18px 48px rgba(17,17,17,.10);
+      --shadow-soft: 0 10px 30px rgba(17,17,17,.08);
+
+      --radius: 22px;
+      --radius-sm: 14px;
+
+      --max: 1200px;
+
+      --ease: cubic-bezier(.2,.8,.2,1);
+    }
+
+    *{ box-sizing: border-box; }
+    html{ scroll-behavior: smooth; }
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.35;
+      overflow-x: hidden;
+    }
+
+    a{ color: inherit; text-decoration: none; }
+
+    /* Subtle animated background glow */
+    .bg-glow{
+      position: fixed;
+      inset: -30vh -20vw auto -20vw;
+      height: 70vh;
+      background:
+        radial-gradient(closest-side, rgba(255,46,166,.22), rgba(255,46,166,0)),
+        radial-gradient(closest-side, rgba(255,107,199,.12), rgba(255,107,199,0));
+      filter: blur(10px);
+      z-index: -2;
+      transform: translate3d(0,0,0);
+      animation: floatGlow 14s var(--ease) infinite alternate;
+    }
+    @keyframes floatGlow{
+      from{ transform: translate3d(-2%, -1%, 0) scale(1); }
+      to{ transform: translate3d(2%, 2%, 0) scale(1.03); }
+    }
+
+    .grain{
+      position: fixed;
+      inset: 0;
+      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="180" height="180" viewBox="0 0 180 180"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="3" stitchTiles="stitch"/></filter><rect width="180" height="180" filter="url(%23n)" opacity="0.06"/></svg>');
+      pointer-events: none;
+      z-index: -1;
+      mix-blend-mode: multiply;
+    }
+
+    /* Layout */
+    .wrap{ max-width: var(--max); margin: 0 auto; padding: 0 22px; }
+    .section{ padding: 70px 0; }
+    .section-tight{ padding: 48px 0; }
+
+    /* Nav (Nike-inspired: clean, centered links, minimal) */
+    .nav{
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(255,255,255,.80);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--line);
+    }
+    .nav-inner{
+      display: grid;
+      grid-template-columns: 220px 1fr 220px;
+      align-items: center;
+      gap: 16px;
+      height: 72px;
+    }
+
+    .brand{
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 900;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+    .brand-mark{
+      width: 34px;
+      height: 18px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      transform: skewX(-18deg);
+      box-shadow: 0 10px 20px rgba(255,46,166,.22);
+    }
+
+    .nav-links{
+      display: flex;
+      justify-content: center;
+      gap: 26px;
+      font-weight: 600;
+      font-size: 14px;
+      letter-spacing: .02em;
+    }
+    .nav-links a{
+      position: relative;
+      padding: 8px 4px;
+      color: rgba(17,17,17,.92);
+    }
+    .nav-links a::after{
+      content: "";
+      position: absolute;
+      left: 50%;
+      bottom: 4px;
+      width: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--accent), var(--accent-2));
+      transform: translateX(-50%);
+      transition: width .24s var(--ease);
+      border-radius: 999px;
+    }
+    .nav-links a:hover::after{ width: 100%; }
+
+    .nav-actions{
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .pill{
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      border: 1px solid var(--line);
+      background: #fff;
+      color: var(--text);
+      padding: 10px 14px;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 13px;
+      letter-spacing: .01em;
+      cursor: pointer;
+      transition: transform .18s var(--ease), box-shadow .18s var(--ease), border-color .18s var(--ease);
+    }
+    .pill:hover{
+      transform: translateY(-1px);
+      box-shadow: var(--shadow-soft);
+      border-color: rgba(255,46,166,.35);
+    }
+
+    .pill.primary{
+      border-color: transparent;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      color: white;
+      box-shadow: 0 18px 40px rgba(255,46,166,.22);
+    }
+
+    .icon{
+      width: 16px;
+      height: 16px;
+      display: inline-block;
+    }
+
+    /* Language dropdown */
+    .lang{ position: relative; }
+    .dropdown{
+      position: absolute;
+      right: 0;
+      top: 46px;
+      width: 220px;
+      border-radius: 16px;
+      background: rgba(255,255,255,.92);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+      padding: 10px;
+      display: none;
+    }
+    .dropdown[aria-hidden="false"]{ display: block; }
+    .dd-title{
+      font-size: 12px;
+      color: var(--muted);
+      padding: 8px 10px 10px;
+      border-bottom: 1px solid var(--line);
+      margin-bottom: 8px;
+    }
+    .dd-item{
+      width: 100%;
+      text-align: left;
+      background: transparent;
+      border: 0;
+      padding: 10px 10px;
+      border-radius: 12px;
+      cursor: pointer;
+      font-weight: 700;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .dd-item:hover{ background: rgba(255,46,166,.08); }
+    .dd-item[aria-current="true"]{
+      background: rgba(255,46,166,.12);
+      box-shadow: inset 0 0 0 1px rgba(255,46,166,.25);
+    }
+
+    /* Hero */
+    .hero{ padding: 46px 0 18px; }
+
+    .hero-grid{
+      display: grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap: 24px;
+      align-items: stretch;
+    }
+
+    .hero-card{
+      border-radius: calc(var(--radius) + 10px);
+      background:
+        radial-gradient(1200px 520px at 20% 10%, rgba(255,46,166,.24), rgba(255,46,166,0) 60%),
+        radial-gradient(900px 520px at 70% 40%, rgba(255,107,199,.16), rgba(255,107,199,0) 55%),
+        linear-gradient(180deg, #ffffff, #ffffff);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      position: relative;
+      padding: 34px;
+      min-height: 420px;
+    }
+
+    .kicker{
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 800;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      font-size: 12px;
+      color: rgba(17,17,17,.70);
+    }
+    .dot{
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: var(--accent);
+      box-shadow: 0 0 0 6px rgba(255,46,166,.16);
+    }
+
+    .headline{
+      margin: 14px 0 10px;
+      font-size: clamp(42px, 5.2vw, 70px);
+      line-height: .95;
+      letter-spacing: -0.03em;
+      text-transform: uppercase;
+      font-weight: 900;
+    }
+    .headline .accent{
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .subhead{
+      margin: 0;
+      max-width: 56ch;
+      font-size: 16px;
+      color: rgba(17,17,17,.78);
+    }
+
+    .hero-bullets{
+      margin: 16px 0 0;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      gap: 8px;
+      max-width: 58ch;
+    }
+    .hero-bullets li{
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      color: rgba(17,17,17,.78);
+      font-weight: 650;
+      font-size: 14px;
+    }
+    .hero-bullets li::before{
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      margin-top: 6px;
+      box-shadow: 0 0 0 6px rgba(255,46,166,.12);
+      flex: 0 0 auto;
+    }
+
+    .hero-cta{
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .hero-media{
+      border-radius: calc(var(--radius) + 10px);
+      border: 1px solid var(--line);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      position: relative;
+      min-height: 420px;
+      background:
+        linear-gradient(135deg, rgba(255,46,166,.12), rgba(255,46,166,0) 55%),
+        linear-gradient(180deg, rgba(17,17,17,.06), rgba(17,17,17,.02));
+    }
+    .hero-media::before{
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(800px 360px at 30% 20%, rgba(255,46,166,.28), rgba(255,46,166,0) 60%),
+        radial-gradient(760px 420px at 70% 60%, rgba(255,107,199,.20), rgba(255,107,199,0) 60%),
+        linear-gradient(180deg, rgba(0,0,0,.40), rgba(0,0,0,.18));
+      opacity: .95;
+    }
+    .hero-media .media-content{
+      position: relative;
+      height: 100%;
+      padding: 26px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      gap: 10px;
+      color: white;
+    }
+    .media-title{
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: -0.02em;
+      font-size: 28px;
+      line-height: 1.02;
+      margin: 0;
+    }
+    .media-sub{
+      margin: 0;
+      color: rgba(255,255,255,.82);
+      font-weight: 600;
+      font-size: 14px;
+      max-width: 42ch;
+    }
+
+    /* Section titles */
+    .section-head{
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 18px;
+    }
+    .h2{
+      margin: 0;
+      font-size: 34px;
+      letter-spacing: -0.03em;
+      text-transform: uppercase;
+      font-weight: 900;
+    }
+    .h2 .accent{
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    .lead{
+      margin: 0;
+      max-width: 70ch;
+      color: rgba(17,17,17,.70);
+      font-weight: 600;
+      font-size: 14px;
+    }
+
+    /* Cards */
+    .grid-2{ display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .grid-3{ display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .grid-4{ display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+
+    .card{
+      border: 1px solid var(--line);
+      background: var(--surface);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-soft);
+      overflow: hidden;
+      position: relative;
+      transition: transform .18s var(--ease), box-shadow .18s var(--ease), border-color .18s var(--ease);
+    }
+    .card:hover{
+      transform: translateY(-2px);
+      box-shadow: var(--shadow);
+      border-color: rgba(255,46,166,.28);
+    }
+    .card .pad{ padding: 18px; }
+
+    .card-kicker{
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 900;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      font-size: 11px;
+      color: rgba(17,17,17,.62);
+    }
+    .card-title{
+      margin: 10px 0 8px;
+      font-size: 18px;
+      letter-spacing: -0.02em;
+      font-weight: 900;
+      text-transform: uppercase;
+    }
+    .card-text{
+      margin: 0;
+      color: rgba(17,17,17,.74);
+      font-weight: 600;
+      font-size: 14px;
+    }
+
+    .list{
+      margin: 12px 0 0;
+      padding-left: 18px;
+      color: rgba(17,17,17,.72);
+      font-weight: 650;
+      font-size: 14px;
+    }
+    .list li{ margin: 6px 0; }
+
+    .split{
+      display: grid;
+      grid-template-columns: 1.05fr .95fr;
+      gap: 16px;
+      align-items: stretch;
+    }
+
+    .panel{
+      border-radius: var(--radius);
+      border: 1px solid var(--line);
+      background:
+        radial-gradient(900px 420px at 30% 20%, rgba(255,46,166,.14), rgba(255,46,166,0) 60%),
+        linear-gradient(180deg, #fff, #fff);
+      box-shadow: var(--shadow-soft);
+      padding: 20px;
+    }
+
+    .stat-row{ display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 14px; }
+    .stat{
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 14px;
+      background: rgba(255,255,255,.75);
+    }
+    .stat b{
+      display: block;
+      font-size: 18px;
+      letter-spacing: -0.02em;
+    }
+    .stat span{
+      display: block;
+      margin-top: 4px;
+      color: rgba(17,17,17,.68);
+      font-weight: 650;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+    }
+
+    /* Submissions */
+    .week-card{
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      min-height: 140px;
+    }
+    .week-top{
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+    .week-pill{
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      padding: 8px 10px;
+      border-radius: 999px;
+      background: rgba(255,46,166,.10);
+      border: 1px solid rgba(255,46,166,.16);
+      color: rgba(17,17,17,.78);
+    }
+    .ghost-btn{
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 12px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      font-weight: 800;
+      font-size: 13px;
+      color: rgba(17,17,17,.82);
+      background: #fff;
+      cursor: pointer;
+      opacity: .92;
+    }
+    .ghost-btn:hover{ border-color: rgba(255,46,166,.30); opacity: 1; }
+
+    /* Footer */
+    footer{
+      padding: 36px 0 52px;
+      border-top: 1px solid var(--line);
+      background: linear-gradient(180deg, rgba(255,46,166,.04), rgba(255,46,166,0));
+    }
+    .footer-inner{
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      align-items: center;
+      justify-content: space-between;
+      color: rgba(17,17,17,.72);
+      font-weight: 650;
+      font-size: 13px;
+    }
+
+    /* Responsive */
+    @media (max-width: 980px){
+      .nav-inner{ grid-template-columns: 1fr auto; }
+      .nav-links{ display: none; }
+      .hero-grid{ grid-template-columns: 1fr; }
+      .hero-card, .hero-media{ min-height: 360px; }
+      .split{ grid-template-columns: 1fr; }
+      .grid-3{ grid-template-columns: 1fr; }
+      .grid-4{ grid-template-columns: 1fr 1fr; }
+      .stat-row{ grid-template-columns: 1fr; }
+    }
+    @media (max-width: 520px){
+      .grid-2{ grid-template-columns: 1fr; }
+      .grid-4{ grid-template-columns: 1fr; }
+      .headline{ font-size: 44px; }
+      .brand{ letter-spacing: .04em; }
+    }
+
+    /* Reduced motion */
+    @media (prefers-reduced-motion: reduce){
+      html{ scroll-behavior: auto; }
+      .bg-glow{ animation: none; }
+      .card, .pill{ transition: none; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="bg-glow" aria-hidden="true"></div>
+  <div class="grain" aria-hidden="true"></div>
+
+  <header class="nav" role="banner">
+    <div class="wrap nav-inner">
+      <a class="brand" href="#top" aria-label="Home">
+        <span class="brand-mark" aria-hidden="true"></span>
+        <span>Amina Ben Nejma</span>
+      </a>
+
+      <nav class="nav-links" aria-label="Primary">
+        <a href="#about" data-i18n="nav_about">About</a>
+        <a href="#course" data-i18n="nav_course">Course</a>
+        <a href="#weeks" data-i18n="nav_weeks">Weekly Submissions</a>
+      </nav>
+
+      <div class="nav-actions">
+        <a class="pill" href="#about" data-i18n="nav_about_btn">About me</a>
+        <a class="pill" href="#weeks" data-i18n="nav_view_work">View work</a>
+
+        <div class="lang">
+          <button class="pill" id="langBtn" aria-haspopup="true" aria-expanded="false">
+            <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10Z" stroke="currentColor" stroke-width="2" opacity=".9"/>
+              <path d="M2 12h20" stroke="currentColor" stroke-width="2" opacity=".9"/>
+              <path d="M12 2c2.9 2.7 4.2 6.1 4.2 10S14.9 19.3 12 22c-2.9-2.7-4.2-6.1-4.2-10S9.1 4.7 12 2Z" stroke="currentColor" stroke-width="2" opacity=".9"/>
+            </svg>
+            <span id="langLabel" data-i18n="lang_label">Language</span>
+            <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M7 10l5 5 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </button>
+
+          <div class="dropdown" id="langMenu" role="menu" aria-hidden="true">
+            <div class="dd-title" data-i18n="lang_choose">Choose a language</div>
+            <button class="dd-item" role="menuitem" data-lang="en" aria-current="true">
+              <span>English</span><span aria-hidden="true">EN</span>
+            </button>
+            <button class="dd-item" role="menuitem" data-lang="de" aria-current="false">
+              <span>Deutsch</span><span aria-hidden="true">DE</span>
+            </button>
+            <button class="dd-item" role="menuitem" data-lang="fr" aria-current="false">
+              <span>Français</span><span aria-hidden="true">FR</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main id="top">
+    <!-- HERO -->
+    <section class="wrap hero" aria-label="Hero">
+      <div class="hero-grid">
+        <div class="hero-card">
+          <div class="kicker"><span class="dot" aria-hidden="true"></span><span data-i18n="hero_kicker">Generative AI for Work & Research</span></div>
+          <h1 class="headline" data-i18n="hero_headline">BUILD. <span class="accent">LEARN.</span> SHIP.</h1>
+          <p class="subhead" data-i18n="hero_subhead">A guided 8-week cohort where I build practical AI systems for work and research — weekly artifacts, feedback, and a capstone.</p>
+          <ul class="hero-bullets" aria-label="Course snapshot">
+            <li data-i18n="hero_b1">Weekly workshops + live help sessions</li>
+            <li data-i18n="hero_b2">Hands-on artifacts: dashboards, workflows, chatbots</li>
+            <li data-i18n="hero_b3">Capstone project + polished portfolio</li>
+          </ul>
+
+          <div class="hero-cta">
+            <a class="pill primary" href="#course" data-i18n="hero_cta_primary">Explore the course</a>
+            <a class="pill" href="#about" data-i18n="hero_cta_secondary">About me</a>
+          </div>
+        </div>
+
+        <aside class="hero-media" aria-label="Featured">
+          <div class="media-content">
+            <p class="card-kicker" style="color: rgba(255,255,255,.78)"><span class="dot" style="box-shadow: 0 0 0 6px rgba(255,255,255,.16); background: #fff" aria-hidden="true"></span><span data-i18n="media_kicker">Featured</span></p>
+            <h2 class="media-title" data-i18n="media_title">MY WEEKLY SUBMISSIONS</h2>
+            <p class="media-sub" data-i18n="media_sub">Each week adds a new artifact: prompts, workflows, dashboards, and a capstone — all tracked here.</p>
+            <a class="pill" style="width: fit-content; border-color: rgba(255,255,255,.35); background: rgba(255,255,255,.10); color:#fff" href="#weeks" data-i18n="media_cta">
+              Jump to weeks
+              <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M7 17L17 7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                <path d="M9 7h8v8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+            </a>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- ABOUT ME -->
+    <section id="about" class="section">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <h2 class="h2" data-i18n="about_title">ABOUT <span class="accent">ME</span></h2>
+            <p class="lead" data-i18n="about_lead">Biomedical background, research mindset, and a growing toolkit for building practical AI workflows.</p>
+          </div>
+          <a class="pill" href="#course" data-i18n="about_cta">See course modules</a>
+        </div>
+
+        <div class="split">
+          <div class="panel">
+            <p class="card-kicker"><span class="dot" aria-hidden="true"></span><span data-i18n="about_profile_kicker">Profile</span></p>
+            <h3 class="card-title" data-i18n="about_profile_title">Amina Ben Nejma</h3>
+            <p class="card-text" data-i18n="about_profile_text">PhD researcher in Biomedicine (University of Zurich). I enjoy combining careful scientific thinking with modern tools — from lab work and histology to data analysis and automation.</p>
+
+            <div class="stat-row" aria-label="Quick facts">
+              <div class="stat">
+                <b data-i18n="about_stat_1_b">Zurich</b>
+                <span data-i18n="about_stat_1">Based in Switzerland</span>
+              </div>
+              <div class="stat">
+                <b data-i18n="about_stat_2_b">PhD</b>
+                <span data-i18n="about_stat_2">University of Zurich</span>
+              </div>
+              <div class="stat">
+                <b data-i18n="about_stat_3_b">Research + Tools</b>
+                <span data-i18n="about_stat_3">Lab → automation</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="grid-2">
+            <article class="card">
+              <div class="pad">
+                <p class="card-kicker"><span class="dot" aria-hidden="true"></span><span data-i18n="about_exp_kicker">Experience</span></p>
+                <h3 class="card-title" data-i18n="about_exp_title">Tissue Biology Research Unit</h3>
+                <ul class="list" data-i18n="about_exp_list">
+                  <li>12-month master thesis research: primary cell isolation, cultivation & trans-differentiation.</li>
+                  <li>Hydrogel development (compression, precision micro-lasering) and histology workflows.</li>
+                  <li>Data analysis + scientific writing for reproducible research.</li>
+                </ul>
+              </div>
+            </article>
+
+            <article class="card">
+              <div class="pad">
+                <p class="card-kicker"><span class="dot" aria-hidden="true"></span><span data-i18n="about_skills_kicker">Toolkit</span></p>
+                <h3 class="card-title" data-i18n="about_skills_title">Skills & Software</h3>
+                <p class="card-text" data-i18n="about_skills_text">Cell culture • Histology • ImageJ • GraphPad Prism • R • Python • PCR • Excel • Adobe Photoshop</p>
+                <div style="height: 12px"></div>
+                <p class="card-kicker"><span class="dot" aria-hidden="true"></span><span data-i18n="about_lang_kicker">Languages</span></p>
+                <p class="card-text" data-i18n="about_lang_text">German (native) • English (fluent) • French (intermediate) • Arabic (beginner) • Spanish (beginner)</p>
+              </div>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- COURSE -->
+    <section id="course" class="section-tight">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <h2 class="h2" data-i18n="course_title">ABOUT <span class="accent">THE COURSE</span></h2>
+            <p class="lead" data-i18n="course_lead">An 8-week guided cohort focused on responsible, no-code AI tools for task automation and research productivity.</p>
+          </div>
+          <a class="pill" href="#weeks" data-i18n="course_cta">Go to weekly submissions</a>
+        </div>
+
+        <div class="grid-3">
+          <article class="card">
+            <div class="pad">
+              <p class="card-kicker"><span class="dot" aria-hidden="true"></span><span data-i18n="course_features_kicker">Bootcamp features</span></p>
+              <h3 class="card-title" data-i18n="course_features_title">Learn live, ship weekly</h3>
+              <ul class="list" data-i18n="course_features_list">
+                <li>Weekly live workshops + live help sessions</li>
+                <li>Private community forums</li>
+                <li>Personalized feedback on assessments</li>
+                <li>Capstone project coaching</li>
+                <li>Shareable certificate + lifetime tutorial library access</li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="pad">
+              <p class="card-kicker"><span class="dot" aria-hidden="true"></span><span data-i18n="course_assessment_kicker">Assessment</span></p>
+              <h3 class="card-title" data-i18n="course_assessment_title">Clear grading rubric</h3>
+              <ul class="list" data-i18n="course_assessment_list">
+                <li>Online quizzes: 15%</li>
+                <li>Workshop assignments: 35%</li>
+                <li>Attendance & participation: 10%</li>
+                <li>Final project: 40%</li>
+                <li>Passing grade: 80% (attend at least 5 workshops)</li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="pad">
+              <p class="card-kicker"><span class="dot" aria-hidden="true"></span><span data-i18n="course_outcomes_kicker">Outcome</span></p>
+              <h3 class="card-title" data-i18n="course_outcomes_title">Responsible workflows</h3>
+              <p class="card-text" data-i18n="course_outcomes_text">I’m building practical systems for research and work: formatting, automation, analysis, summarization, and communication — with transparency and integrity.</p>
+              <div style="height: 14px"></div>
+              <a class="pill" href="#modules" data-i18n="course_outcomes_cta">View modules</a>
+            </div>
+          </article>
+        </div>
+
+        <div style="height: 18px"></div>
+
+        <div id="modules" class="panel">
+          <p class="card-kicker"><span class="dot" aria-hidden="true"></span><span data-i18n="modules_kicker">Course modules</span></p>
+          <h3 class="card-title" data-i18n="modules_title">What we cover (Weeks 1–8)</h3>
+
+          <div class="grid-4" style="margin-top: 14px;">
+            <article class="card"><div class="pad">
+              <p class="card-kicker" data-i18n="m1_kicker">Module 1</p>
+              <h4 class="card-title" data-i18n="m1_title">Websites, Documents & Presentations</h4>
+              <p class="card-text" data-i18n="m1_text">LLM basics + responsible writing, Markdown/LaTeX/HTML, simple research websites, and AI-assisted presentations.</p>
+            </div></article>
+
+            <article class="card"><div class="pad">
+              <p class="card-kicker" data-i18n="m2_kicker">Module 2</p>
+              <h4 class="card-title" data-i18n="m2_title">AI-Automated Data Analysis</h4>
+              <p class="card-text" data-i18n="m2_text">Transparent analysis, dashboards, file processing, automated reports, and spreadsheet automations.</p>
+            </div></article>
+
+            <article class="card"><div class="pad">
+              <p class="card-kicker" data-i18n="m3_kicker">Module 3</p>
+              <h4 class="card-title" data-i18n="m3_title">GenAI for Research & Text Analysis</h4>
+              <p class="card-text" data-i18n="m3_text">Literature review, classification, sentiment trends, knowledge maps, summarization, and synthesis systems.</p>
+            </div></article>
+
+            <article class="card"><div class="pad">
+              <p class="card-kicker" data-i18n="m4_kicker">Module 4</p>
+              <h4 class="card-title" data-i18n="m4_title">Custom GPTs & Chatbots</h4>
+              <p class="card-text" data-i18n="m4_text">Chat architecture, RAG, custom GPTs, Botpress workflows, and knowledge-base integrations.</p>
+            </div></article>
+
+            <article class="card"><div class="pad">
+              <p class="card-kicker" data-i18n="m5_kicker">Module 5</p>
+              <h4 class="card-title" data-i18n="m5_title">AI for Task Automation</h4>
+              <p class="card-text" data-i18n="m5_text">Responsible agents, email automations, complex flows, and browser control agents.</p>
+            </div></article>
+
+            <article class="card"><div class="pad">
+              <p class="card-kicker" data-i18n="m6_kicker">Module 6</p>
+              <h4 class="card-title" data-i18n="m6_title">GenAI for Communication & Outreach</h4>
+              <p class="card-text" data-i18n="m6_text">Audience-specific summaries, scientific figures, video abstracts, and scheduling content responsibly.</p>
+            </div></article>
+
+            <article class="card"><div class="pad">
+              <p class="card-kicker" data-i18n="m7_kicker">Module 7</p>
+              <h4 class="card-title" data-i18n="m7_title">Capstone Project & Showcase</h4>
+              <p class="card-text" data-i18n="m7_text">Progress checks, peer feedback, final presentations, and public Q&A.</p>
+            </div></article>
+
+            <article class="card"><div class="pad">
+              <p class="card-kicker" data-i18n="m8_kicker">Week 8</p>
+              <h4 class="card-title" data-i18n="m8_title">Ship & reflect</h4>
+              <p class="card-text" data-i18n="m8_text">Package artifacts, polish the portfolio, and prepare the final handoff.</p>
+            </div></article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- WEEKS -->
+    <section id="weeks" class="section">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <h2 class="h2" data-i18n="weeks_title">MY <span class="accent">WEEKLY</span> SUBMISSIONS</h2>
+            <p class="lead" data-i18n="weeks_lead">Placeholders for now — we’ll add links to each submission as we go.</p>
+          </div>
+          <button class="pill" id="scrollTop" type="button" aria-label="Back to top" data-i18n="weeks_backtop">Back to top</button>
+        </div>
+
+        <div class="grid-4">
+          <article class="card week-card"><div class="pad">
+            <div class="week-top">
+              <span class="week-pill" data-i18n="w1_tag">Week 1</span>
+              <button class="ghost-btn" type="button" data-i18n="week_btn">Add link</button>
+            </div>
+            <h3 class="card-title" data-i18n="w1_title">Websites & structured documents</h3>
+            <p class="card-text" data-i18n="w1_text">Canvas website draft + Markdown/LaTeX formatting practice.</p>
+          </div></article>
+
+          <article class="card week-card"><div class="pad">
+            <div class="week-top">
+              <span class="week-pill" data-i18n="w2_tag">Week 2</span>
+              <button class="ghost-btn" type="button" data-i18n="week_btn">Add link</button>
+            </div>
+            <h3 class="card-title" data-i18n="w2_title">Automated analysis</h3>
+            <p class="card-text" data-i18n="w2_text">Data exploration + reproducible reporting workflow.</p>
+          </div></article>
+
+          <article class="card week-card"><div class="pad">
+            <div class="week-top">
+              <span class="week-pill" data-i18n="w3_tag">Week 3</span>
+              <button class="ghost-btn" type="button" data-i18n="week_btn">Add link</button>
+            </div>
+            <h3 class="card-title" data-i18n="w3_title">Literature & text analysis</h3>
+            <p class="card-text" data-i18n="w3_text">Search → summarize → synthesize pipeline (responsible notes).</p>
+          </div></article>
+
+          <article class="card week-card"><div class="pad">
+            <div class="week-top">
+              <span class="week-pill" data-i18n="w4_tag">Week 4</span>
+              <button class="ghost-btn" type="button" data-i18n="week_btn">Add link</button>
+            </div>
+            <h3 class="card-title" data-i18n="w4_title">Custom GPT / chatbot</h3>
+            <p class="card-text" data-i18n="w4_text">A small assistant for a specific workflow (RAG-ready).</p>
+          </div></article>
+
+          <article class="card week-card"><div class="pad">
+            <div class="week-top">
+              <span class="week-pill" data-i18n="w5_tag">Week 5</span>
+              <button class="ghost-btn" type="button" data-i18n="week_btn">Add link</button>
+            </div>
+            <h3 class="card-title" data-i18n="w5_title">Task automation</h3>
+            <p class="card-text" data-i18n="w5_text">Agent-style workflow: inputs → checks → outputs.</p>
+          </div></article>
+
+          <article class="card week-card"><div class="pad">
+            <div class="week-top">
+              <span class="week-pill" data-i18n="w6_tag">Week 6</span>
+              <button class="ghost-btn" type="button" data-i18n="week_btn">Add link</button>
+            </div>
+            <h3 class="card-title" data-i18n="w6_title">Communication assets</h3>
+            <p class="card-text" data-i18n="w6_text">Figures, summaries, and outreach content — with transparency.</p>
+          </div></article>
+
+          <article class="card week-card"><div class="pad">
+            <div class="week-top">
+              <span class="week-pill" data-i18n="w7_tag">Week 7</span>
+              <button class="ghost-btn" type="button" data-i18n="week_btn">Add link</button>
+            </div>
+            <h3 class="card-title" data-i18n="w7_title">Capstone build</h3>
+            <p class="card-text" data-i18n="w7_text">Prototype + feedback loop + iteration checklist.</p>
+          </div></article>
+
+          <article class="card week-card"><div class="pad">
+            <div class="week-top">
+              <span class="week-pill" data-i18n="w8_tag">Week 8</span>
+              <button class="ghost-btn" type="button" data-i18n="week_btn">Add link</button>
+            </div>
+            <h3 class="card-title" data-i18n="w8_title">Showcase</h3>
+            <p class="card-text" data-i18n="w8_text">Final polish, demo narrative, and portfolio handoff.</p>
+          </div></article>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="wrap footer-inner">
+        <span data-i18n="footer_left">© <span id="year"></span> Amina Ben Nejma • Portfolio</span>
+        <span data-i18n="footer_right">No frameworks • Lightweight • Pink accents</span>
+      </div>
+    </footer>
+  </main>
+
+  <script>
+    // --- i18n dictionary (EN / DE / FR) ---
+    const i18n = {
+      en: {
+        nav_about: "About",
+        nav_course: "Course",
+        nav_weeks: "Weekly Submissions",
+        nav_view_work: "View work",
+        nav_about_btn: "About me",
+
+        lang_label: "Language",
+        lang_choose: "Choose a language",
+
+        hero_kicker: "Generative AI for Work & Research",
+        hero_headline: "BUILD. <span class=\"accent\">LEARN.</span> SHIP.",
+        hero_subhead: "A guided 8-week cohort where I build practical AI systems for work and research — weekly artifacts, feedback, and a capstone.",
+        hero_cta_primary: "Explore the course",
+        hero_cta_secondary: "About me",
+        hero_b1: "Weekly workshops + live help sessions",
+        hero_b2: "Hands-on artifacts: dashboards, workflows, chatbots",
+        hero_b3: "Capstone project + polished portfolio",
+
+        media_kicker: "Featured",
+        media_title: "MY WEEKLY SUBMISSIONS",
+        media_sub: "Each week adds a new artifact: prompts, workflows, dashboards, and a capstone — all tracked here.",
+        media_cta: "Jump to weeks",
+
+        about_title: "ABOUT <span class=\"accent\">ME</span>",
+        about_lead: "Biomedical background, research mindset, and a growing toolkit for building practical AI workflows.",
+        about_cta: "See course modules",
+
+        about_profile_kicker: "Profile",
+        about_profile_title: "Amina Ben Nejma",
+        about_profile_text: "PhD researcher in Biomedicine (University of Zurich). I enjoy combining careful scientific thinking with modern tools — from lab work and histology to data analysis and automation.",
+        about_stat_1_b: "Zurich",
+        about_stat_1: "Based in Switzerland",
+        about_stat_2_b: "PhD",
+        about_stat_2: "University of Zurich",
+        about_stat_3_b: "Research + Tools",
+        about_stat_3: "Lab → automation",
+
+        about_exp_kicker: "Experience",
+        about_exp_title: "Tissue Biology Research Unit",
+        about_exp_list: "<li>12-month master thesis research: primary cell isolation, cultivation & trans-differentiation.</li><li>Hydrogel development (compression, precision micro-lasering) and histology workflows.</li><li>Data analysis + scientific writing for reproducible research.</li>",
+
+        about_skills_kicker: "Toolkit",
+        about_skills_title: "Skills & Software",
+        about_skills_text: "Cell culture • Histology • ImageJ • GraphPad Prism • R • Python • PCR • Excel • Adobe Photoshop",
+        about_lang_kicker: "Languages",
+        about_lang_text: "German (native) • English (fluent) • French (intermediate) • Arabic (beginner) • Spanish (beginner)",
+
+        course_title: "ABOUT <span class=\"accent\">THE COURSE</span>",
+        course_lead: "An 8-week guided cohort focused on responsible, no-code AI tools for task automation and research productivity.",
+        course_cta: "Go to weekly submissions",
+
+        course_features_kicker: "Bootcamp features",
+        course_features_title: "Learn live, ship weekly",
+        course_features_list: "<li>Weekly live workshops + live help sessions</li><li>Private community forums</li><li>Personalized feedback on assessments</li><li>Capstone project coaching</li><li>Shareable certificate + lifetime tutorial library access</li>",
+
+        course_assessment_kicker: "Assessment",
+        course_assessment_title: "Clear grading rubric",
+        course_assessment_list: "<li>Online quizzes: 15%</li><li>Workshop assignments: 35%</li><li>Attendance & participation: 10%</li><li>Final project: 40%</li><li>Passing grade: 80% (attend at least 5 workshops)</li>",
+
+        course_outcomes_kicker: "Outcome",
+        course_outcomes_title: "Responsible workflows",
+        course_outcomes_text: "I’m building practical systems for research and work: formatting, automation, analysis, summarization, and communication — with transparency and integrity.",
+        course_outcomes_cta: "View modules",
+
+        modules_kicker: "Course modules",
+        modules_title: "What we cover (Weeks 1–8)",
+
+        m1_kicker: "Module 1",
+        m1_title: "Websites, Documents & Presentations",
+        m1_text: "LLM basics + responsible writing, Markdown/LaTeX/HTML, simple research websites, and AI-assisted presentations.",
+
+        m2_kicker: "Module 2",
+        m2_title: "AI-Automated Data Analysis",
+        m2_text: "Transparent analysis, dashboards, file processing, automated reports, and spreadsheet automations.",
+
+        m3_kicker: "Module 3",
+        m3_title: "GenAI for Research & Text Analysis",
+        m3_text: "Literature review, classification, sentiment trends, knowledge maps, summarization, and synthesis systems.",
+
+        m4_kicker: "Module 4",
+        m4_title: "Custom GPTs & Chatbots",
+        m4_text: "Chat architecture, RAG, custom GPTs, Botpress workflows, and knowledge-base integrations.",
+
+        m5_kicker: "Module 5",
+        m5_title: "AI for Task Automation",
+        m5_text: "Responsible agents, email automations, complex flows, and browser control agents.",
+
+        m6_kicker: "Module 6",
+        m6_title: "GenAI for Communication & Outreach",
+        m6_text: "Audience-specific summaries, scientific figures, video abstracts, and scheduling content responsibly.",
+
+        m7_kicker: "Module 7",
+        m7_title: "Capstone Project & Showcase",
+        m7_text: "Progress checks, peer feedback, final presentations, and public Q&A.",
+
+        m8_kicker: "Week 8",
+        m8_title: "Ship & reflect",
+        m8_text: "Package artifacts, polish the portfolio, and prepare the final handoff.",
+
+        weeks_title: "MY <span class=\"accent\">WEEKLY</span> SUBMISSIONS",
+        weeks_lead: "Placeholders for now — we’ll add links to each submission as we go.",
+        weeks_backtop: "Back to top",
+
+        week_btn: "Add link",
+
+        w1_tag: "Week 1",
+        w1_title: "Websites & structured documents",
+        w1_text: "Canvas website draft + Markdown/LaTeX formatting practice.",
+
+        w2_tag: "Week 2",
+        w2_title: "Automated analysis",
+        w2_text: "Data exploration + reproducible reporting workflow.",
+
+        w3_tag: "Week 3",
+        w3_title: "Literature & text analysis",
+        w3_text: "Search → summarize → synthesize pipeline (responsible notes).",
+
+        w4_tag: "Week 4",
+        w4_title: "Custom GPT / chatbot",
+        w4_text: "A small assistant for a specific workflow (RAG-ready).",
+
+        w5_tag: "Week 5",
+        w5_title: "Task automation",
+        w5_text: "Agent-style workflow: inputs → checks → outputs.",
+
+        w6_tag: "Week 6",
+        w6_title: "Communication assets",
+        w6_text: "Figures, summaries, and outreach content — with transparency.",
+
+        w7_tag: "Week 7",
+        w7_title: "Capstone build",
+        w7_text: "Prototype + feedback loop + iteration checklist.",
+
+        w8_tag: "Week 8",
+        w8_title: "Showcase",
+        w8_text: "Final polish, demo narrative, and portfolio handoff.",
+
+        footer_left: "© <span id=\"year\"></span> Amina Ben Nejma • Portfolio",
+        footer_right: "No frameworks • Lightweight • Pink accents",
+      },
+
+      de: {
+        nav_about: "Über mich",
+        nav_course: "Kurs",
+        nav_weeks: "Wöchentliche Abgaben",
+        nav_view_work: "Arbeiten ansehen",
+        nav_about_btn: "Über mich",
+
+        lang_label: "Sprache",
+        lang_choose: "Sprache auswählen",
+
+        hero_kicker: "Generative KI für Arbeit & Forschung",
+        hero_headline: "BAUEN. <span class=\"accent\">LERNEN.</span> LIEFERN.",
+        hero_subhead: "Eine geführte 8-wöchige Cohort, in der ich praktische KI-Systeme für Arbeit und Forschung baue — wöchentliche Artefakte, Feedback und ein Capstone.",
+        hero_cta_primary: "Kurs entdecken",
+        hero_cta_secondary: "Über mich",
+        hero_b1: "Wöchentliche Workshops + Live-Help-Sessions",
+        hero_b2: "Hands-on-Artefakte: Dashboards, Workflows, Chatbots",
+        hero_b3: "Capstone-Projekt + poliertes Portfolio",
+
+        media_kicker: "Highlight",
+        media_title: "MEINE WÖCHENTLICHEN ABGABEN",
+        media_sub: "Jede Woche entsteht ein neues Artefakt: Prompts, Workflows, Dashboards und ein Capstone — alles hier dokumentiert.",
+        media_cta: "Zu den Wochen",
+
+        about_title: "ÜBER <span class=\"accent\">MICH</span>",
+        about_lead: "Biomedizinischer Hintergrund, Research-Mindset und ein wachsendes Toolkit für praktische KI-Workflows.",
+        about_cta: "Module ansehen",
+
+        about_profile_kicker: "Profil",
+        about_profile_title: "Amina Ben Nejma",
+        about_profile_text: "PhD-Kandidatin in Biomedizin (Universität Zürich). Ich kombiniere gerne sorgfältiges wissenschaftliches Denken mit modernen Tools — von Labor & Histologie bis Datenanalyse und Automatisierung.",
+        about_stat_1_b: "Zürich",
+        about_stat_1: "Schweiz",
+        about_stat_2_b: "PhD",
+        about_stat_2: "Universität Zürich",
+        about_stat_3_b: "Research + Tools",
+        about_stat_3: "Labor → Automation",
+
+        about_exp_kicker: "Erfahrung",
+        about_exp_title: "Tissue Biology Research Unit",
+        about_exp_list: "<li>12 Monate Master-Thesis: primäre Zellisolierung, Kultivierung & Transdifferenzierung.</li><li>Hydrogel-Entwicklung (Kompression, präzises Micro-Lasering) und Histologie-Workflows.</li><li>Datenanalyse + Scientific Writing für reproduzierbare Forschung.</li>",
+
+        about_skills_kicker: "Toolkit",
+        about_skills_title: "Skills & Software",
+        about_skills_text: "Zellkultur • Histologie • ImageJ • GraphPad Prism • R • Python • PCR • Excel • Adobe Photoshop",
+        about_lang_kicker: "Sprachen",
+        about_lang_text: "Deutsch (Muttersprache) • Englisch (fließend) • Französisch (mittel) • Arabisch (Anfänger) • Spanisch (Anfänger)",
+
+        course_title: "ÜBER <span class=\"accent\">DEN KURS</span>",
+        course_lead: "Ein 8-wöchiger geführter Kurs mit Fokus auf verantwortungsvolle No-Code-KI-Tools für Automatisierung und Research-Produktivität.",
+        course_cta: "Zu den Abgaben",
+
+        course_features_kicker: "Bootcamp-Features",
+        course_features_title: "Live lernen, wöchentlich liefern",
+        course_features_list: "<li>Wöchentliche Live-Workshops + Help-Sessions</li><li>Private Community-Foren</li><li>Personalisiertes Feedback</li><li>Capstone-Coaching</li><li>Zertifikat + lebenslanger Zugriff auf die Tutorial-Bibliothek</li>",
+
+        course_assessment_kicker: "Bewertung",
+        course_assessment_title: "Klare Rubrik",
+        course_assessment_list: "<li>Online-Quiz: 15%</li><li>Workshop-Aufgaben: 35%</li><li>Teilnahme & Beteiligung: 10%</li><li>Abschlussprojekt: 40%</li><li>Bestehen: 80% (mind. 5 Workshops besuchen)</li>",
+
+        course_outcomes_kicker: "Ziel",
+        course_outcomes_title: "Verantwortungsvolle Workflows",
+        course_outcomes_text: "Ich entwickle praktische Systeme für Forschung und Arbeit: Formatierung, Automatisierung, Analyse, Zusammenfassung und Kommunikation — transparent und integer.",
+        course_outcomes_cta: "Module ansehen",
+
+        modules_kicker: "Kursmodule",
+        modules_title: "Inhalte (Woche 1–8)",
+
+        m1_kicker: "Modul 1",
+        m1_title: "Websites, Dokumente & Präsentationen",
+        m1_text: "LLM-Grundlagen + verantwortungsvolles Schreiben, Markdown/LaTeX/HTML, einfache Research-Websites und KI-gestützte Präsentationen.",
+
+        m2_kicker: "Modul 2",
+        m2_title: "KI-automatisierte Datenanalyse",
+        m2_text: "Transparente Analyse, Dashboards, Dateiverarbeitung, automatische Reports und Spreadsheet-Automationen.",
+
+        m3_kicker: "Modul 3",
+        m3_title: "GenAI für Research & Textanalyse",
+        m3_text: "Literaturrecherche, Klassifikation, Sentiment-Trends, Knowledge Maps, Summarization und Synthese-Systeme.",
+
+        m4_kicker: "Modul 4",
+        m4_title: "Custom GPTs & Chatbots",
+        m4_text: "Chat-Architektur, RAG, Custom GPTs, Botpress-Workflows und Wissensdatenbank-Integrationen.",
+
+        m5_kicker: "Modul 5",
+        m5_title: "KI für Task-Automation",
+        m5_text: "Verantwortungsvolle Agents, E-Mail-Automationen, komplexe Flows und Browser-Control-Agents.",
+
+        m6_kicker: "Modul 6",
+        m6_title: "GenAI für Kommunikation & Outreach",
+        m6_text: "Zielgruppengerechte Summaries, wissenschaftliche Grafiken, Video-Abstracts und Content-Planung.",
+
+        m7_kicker: "Modul 7",
+        m7_title: "Capstone & Showcase",
+        m7_text: "Progress-Checks, Peer-Feedback, Final-Präsentationen und öffentliche Q&A.",
+
+        m8_kicker: "Woche 8",
+        m8_title: "Ship & reflektieren",
+        m8_text: "Artefakte bündeln, Portfolio polieren und final übergeben.",
+
+        weeks_title: "MEINE <span class=\"accent\">WÖCHENTLICHEN</span> ABGABEN",
+        weeks_lead: "Noch Platzhalter — Links folgen im Verlauf des Kurses.",
+        weeks_backtop: "Nach oben",
+
+        week_btn: "Link hinzufügen",
+
+        w1_tag: "Woche 1",
+        w1_title: "Websites & strukturierte Dokumente",
+        w1_text: "Canvas-Website-Entwurf + Markdown/LaTeX-Formatierung.",
+
+        w2_tag: "Woche 2",
+        w2_title: "Automatisierte Analyse",
+        w2_text: "Datenexploration + reproduzierbarer Reporting-Workflow.",
+
+        w3_tag: "Woche 3",
+        w3_title: "Literatur & Textanalyse",
+        w3_text: "Search → Summarize → Synthesize Pipeline (responsible notes).",
+
+        w4_tag: "Woche 4",
+        w4_title: "Custom GPT / Chatbot",
+        w4_text: "Kleiner Assistent für einen konkreten Workflow (RAG-ready).",
+
+        w5_tag: "Woche 5",
+        w5_title: "Task-Automation",
+        w5_text: "Agent-Workflow: Inputs → Checks → Outputs.",
+
+        w6_tag: "Woche 6",
+        w6_title: "Kommunikations-Assets",
+        w6_text: "Grafiken, Summaries und Outreach — transparent erstellt.",
+
+        w7_tag: "Woche 7",
+        w7_title: "Capstone Build",
+        w7_text: "Prototype + Feedback + Iterations-Checkliste.",
+
+        w8_tag: "Woche 8",
+        w8_title: "Showcase",
+        w8_text: "Finaler Feinschliff, Demo-Story und Portfolio-Handoff.",
+
+        footer_left: "© <span id=\"year\"></span> Amina Ben Nejma • Portfolio",
+        footer_right: "Keine Frameworks • Leichtgewichtig • Pinke Akzente",
+      },
+
+      fr: {
+        nav_about: "À propos",
+        nav_course: "Cours",
+        nav_weeks: "Rendus hebdomadaires",
+        nav_view_work: "Voir mes rendus",
+        nav_about_btn: "À propos de moi",
+
+        lang_label: "Langue",
+        lang_choose: "Choisir une langue",
+
+        hero_kicker: "IA générative pour le travail & la recherche",
+        hero_headline: "CRÉER. <span class=\"accent\">APPRENDRE.</span> LIVRER.",
+        hero_subhead: "Une cohorte guidée de 8 semaines où je construis des systèmes IA utiles pour le travail et la recherche — rendus hebdos, feedback et capstone.",
+        hero_cta_primary: "Explorer le cours",
+        hero_cta_secondary: "À propos de moi",
+        hero_b1: "Ateliers hebdomadaires + sessions d’aide",
+        hero_b2: "Artefacts pratiques : dashboards, workflows, chatbots",
+        hero_b3: "Capstone + portfolio final",
+
+        media_kicker: "À la une",
+        media_title: "MES RENDUS HEBDOMADAIRES",
+        media_sub: "Chaque semaine, un nouvel artefact : prompts, workflows, dashboards et capstone — tout est suivi ici.",
+        media_cta: "Aller aux semaines",
+
+        about_title: "À PROPOS <span class=\"accent\">DE MOI</span>",
+        about_lead: "Parcours biomédical, esprit de recherche et une boîte à outils qui grandit pour créer des workflows IA utiles.",
+        about_cta: "Voir les modules",
+
+        about_profile_kicker: "Profil",
+        about_profile_title: "Amina Ben Nejma",
+        about_profile_text: "Doctorat (PhD) en biomédecine (Université de Zurich). J’aime associer rigueur scientifique et outils modernes — du laboratoire & histologie à l’analyse de données et l’automatisation.",
+        about_stat_1_b: "Zurich",
+        about_stat_1: "Basée en Suisse",
+        about_stat_2_b: "PhD",
+        about_stat_2: "Université de Zurich",
+        about_stat_3_b: "Recherche + outils",
+        about_stat_3: "Labo → automation",
+
+        about_exp_kicker: "Expérience",
+        about_exp_title: "Tissue Biology Research Unit",
+        about_exp_list: "<li>12 mois de recherche (mémoire) : isolement cellulaire primaire, culture & transdifférenciation.</li><li>Hydrogels (compression, micro-laser de précision) et workflows d’histologie.</li><li>Analyse de données + rédaction scientifique pour une recherche reproductible.</li>",
+
+        about_skills_kicker: "Outils",
+        about_skills_title: "Compétences & logiciels",
+        about_skills_text: "Culture cellulaire • Histologie • ImageJ • GraphPad Prism • R • Python • PCR • Excel • Adobe Photoshop",
+        about_lang_kicker: "Langues",
+        about_lang_text: "Allemand (natif) • Anglais (courant) • Français (intermédiaire) • Arabe (débutant) • Espagnol (débutant)",
+
+        course_title: "À PROPOS <span class=\"accent\">DU COURS</span>",
+        course_lead: "Un programme guidé de 8 semaines axé sur des outils IA no-code responsables pour l’automatisation et la productivité en recherche.",
+        course_cta: "Aller aux rendus",
+
+        course_features_kicker: "Bootcamp",
+        course_features_title: "Apprendre en live, livrer chaque semaine",
+        course_features_list: "<li>Ateliers live hebdomadaires + sessions d’aide</li><li>Forums communautaires privés</li><li>Feedback personnalisé sur les évaluations</li><li>Coaching capstone</li><li>Certificat partageable + accès à vie à la bibliothèque de tutoriels</li>",
+
+        course_assessment_kicker: "Évaluation",
+        course_assessment_title: "Barème clair",
+        course_assessment_list: "<li>Quiz en ligne : 15%</li><li>Devoirs d’atelier : 35%</li><li>Présence & participation : 10%</li><li>Projet final : 40%</li><li>Validation : 80% (au moins 5 ateliers)</li>",
+
+        course_outcomes_kicker: "Objectif",
+        course_outcomes_title: "Workflows responsables",
+        course_outcomes_text: "Je construis des systèmes pratiques pour la recherche et le travail : mise en forme, automatisation, analyse, synthèse et communication — avec transparence et intégrité.",
+        course_outcomes_cta: "Voir les modules",
+
+        modules_kicker: "Modules",
+        modules_title: "Ce qu’on couvre (Semaines 1–8)",
+
+        m1_kicker: "Module 1",
+        m1_title: "Sites, documents & présentations",
+        m1_text: "Bases des LLM + rédaction responsable, Markdown/LaTeX/HTML, sites de recherche simples, présentations avec assistants IA.",
+
+        m2_kicker: "Module 2",
+        m2_title: "Analyse de données automatisée",
+        m2_text: "Analyse transparente, dashboards, traitement de fichiers, rapports automatisés et automatisations tableur.",
+
+        m3_kicker: "Module 3",
+        m3_title: "GenAI pour recherche & analyse de texte",
+        m3_text: "Revue de littérature, classification, tendances de sentiment, cartes de connaissances, résumés et systèmes de synthèse.",
+
+        m4_kicker: "Module 4",
+        m4_title: "Custom GPTs & chatbots",
+        m4_text: "Architecture de chat, RAG, GPTs spécialisés, workflows Botpress et intégration de bases de connaissances.",
+
+        m5_kicker: "Module 5",
+        m5_title: "IA pour l’automatisation",
+        m5_text: "Agents responsables, automatisations email, flux complexes et agents de contrôle navigateur.",
+
+        m6_kicker: "Module 6",
+        m6_title: "Communication & outreach",
+        m6_text: "Résumés selon l’audience, figures scientifiques, vidéo-abstracts et planification de contenu.",
+
+        m7_kicker: "Module 7",
+        m7_title: "Capstone & showcase",
+        m7_text: "Points d’avancement, feedback pairs, présentations finales et Q&R public.",
+
+        m8_kicker: "Semaine 8",
+        m8_title: "Livrer & réfléchir",
+        m8_text: "Assembler les artefacts, peaufiner le portfolio et préparer la livraison finale.",
+
+        weeks_title: "MES <span class=\"accent\">RENDUS</span> HEBDOMADAIRES",
+        weeks_lead: "Pour l’instant, des placeholders — on ajoutera les liens au fil des semaines.",
+        weeks_backtop: "Haut de page",
+
+        week_btn: "Ajouter un lien",
+
+        w1_tag: "Semaine 1",
+        w1_title: "Sites & documents structurés",
+        w1_text: "Brouillon de site Canvas + exercices de mise en forme Markdown/LaTeX.",
+
+        w2_tag: "Semaine 2",
+        w2_title: "Analyse automatisée",
+        w2_text: "Exploration de données + workflow de reporting reproductible.",
+
+        w3_tag: "Semaine 3",
+        w3_title: "Littérature & analyse de texte",
+        w3_text: "Pipeline rechercher → résumer → synthétiser (notes responsables).",
+
+        w4_tag: "Semaine 4",
+        w4_title: "Custom GPT / chatbot",
+        w4_text: "Un petit assistant pour un workflow précis (prêt pour RAG).",
+
+        w5_tag: "Semaine 5",
+        w5_title: "Automatisation de tâches",
+        w5_text: "Workflow type agent : entrées → contrôles → sorties.",
+
+        w6_tag: "Semaine 6",
+        w6_title: "Assets de communication",
+        w6_text: "Figures, résumés et contenus d’outreach — avec transparence.",
+
+        w7_tag: "Semaine 7",
+        w7_title: "Construction capstone",
+        w7_text: "Prototype + boucle de feedback + checklist d’itération.",
+
+        w8_tag: "Semaine 8",
+        w8_title: "Showcase",
+        w8_text: "Polish final, narration de démo et livraison du portfolio.",
+
+        footer_left: "© <span id=\"year\"></span> Amina Ben Nejma • Portfolio",
+        footer_right: "Sans framework • Léger • Accents rose",
+      }
+    };
+
+    const defaultLang = (() => {
+      const stored = localStorage.getItem('lang');
+      if (stored && i18n[stored]) return stored;
+      const nav = (navigator.language || 'en').slice(0,2).toLowerCase();
+      return i18n[nav] ? nav : 'en';
+    })();
+
+    function setLang(lang){
+      if (!i18n[lang]) return;
+      localStorage.setItem('lang', lang);
+      document.documentElement.lang = lang;
+
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        const value = i18n[lang][key];
+        if (value == null) return;
+        if (typeof value === 'string' && value.includes('<')) el.innerHTML = value;
+        else el.textContent = value;
+      });
+
+      document.querySelectorAll('.dd-item').forEach(btn => {
+        const isCurrent = btn.dataset.lang === lang;
+        btn.setAttribute('aria-current', isCurrent ? 'true' : 'false');
+      });
+
+      const label = document.getElementById('langLabel');
+      if (label) {
+        const map = { en: 'Language', de: 'Sprache', fr: 'Langue' };
+        label.textContent = map[lang] || 'Language';
+      }
+    }
+
+    // Dropdown interactions
+    const langBtn = document.getElementById('langBtn');
+    const langMenu = document.getElementById('langMenu');
+
+    function openMenu(){
+      langMenu.setAttribute('aria-hidden', 'false');
+      langBtn.setAttribute('aria-expanded', 'true');
+    }
+    function closeMenu(){
+      langMenu.setAttribute('aria-hidden', 'true');
+      langBtn.setAttribute('aria-expanded', 'false');
+    }
+
+    langBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const isOpen = langMenu.getAttribute('aria-hidden') === 'false';
+      isOpen ? closeMenu() : openMenu();
+    });
+
+    langMenu.addEventListener('click', (e) => {
+      const target = e.target.closest('.dd-item');
+      if (!target) return;
+      setLang(target.dataset.lang);
+      closeMenu();
+    });
+
+    document.addEventListener('click', () => closeMenu());
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeMenu();
+    });
+
+    // Back to top
+    document.getElementById('scrollTop').addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    // Footer year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Lightweight runtime checks ("tests") to catch missing i18n keys early.
+    function runTests(){
+      try {
+        const requiredKeys = [
+          'nav_about','nav_course','nav_weeks','nav_view_work','nav_about_btn',
+          'lang_label','lang_choose',
+          'hero_kicker','hero_headline','hero_subhead','hero_cta_primary','hero_cta_secondary','hero_b1','hero_b2','hero_b3',
+          'about_title','about_profile_text',
+          'course_title','weeks_title'
+        ];
+
+        const langs = Object.keys(i18n);
+        const failures = [];
+        for (const l of langs){
+          for (const k of requiredKeys){
+            if (!(k in i18n[l])) failures.push(`${l}.${k}`);
+          }
+        }
+        if (failures.length){
+          console.error('[i18n tests] Missing keys:', failures);
+        }
+
+        const prev = document.documentElement.lang;
+        setLang('en');
+        setLang('de');
+        setLang('fr');
+        setLang(prev in i18n ? prev : 'en');
+        console.info('[i18n tests] OK');
+      } catch (err){
+        console.error('[i18n tests] Failed:', err);
+      }
+    }
+
+    // Init
+    setLang(defaultLang);
+    runTests();
+  </script>
+</body>
+</html>
