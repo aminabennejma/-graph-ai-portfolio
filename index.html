@@ -103,12 +103,25 @@
       white-space: nowrap;
     }
     .brand-mark{
+      /* legacy (kept for optional use) */
       width: 34px;
       height: 18px;
       border-radius: 999px;
       background: linear-gradient(135deg, var(--accent), var(--accent-2));
       transform: skewX(-18deg);
       box-shadow: 0 10px 20px rgba(255,46,166,.22);
+      display: none;
+    }
+
+    .nav-avatar{
+      width: 38px;
+      height: 38px;
+      border-radius: 999px;
+      object-fit: cover;
+      border: 2px solid rgba(255,46,166,.18);
+      box-shadow: 0 12px 26px rgba(255,46,166,.18);
+      background: #fff;
+      flex: 0 0 auto;
     }
 
     .nav-links{
@@ -224,6 +237,33 @@
 
     /* Hero */
     .hero{ padding: 46px 0 18px; }
+
+    .hero-top{
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .avatar{
+      width: 58px;
+      height: 58px;
+      border-radius: 999px;
+      object-fit: cover;
+      border: 2px solid rgba(255,46,166,.20);
+      box-shadow: 0 14px 34px rgba(255,46,166,.16);
+      background: #fff;
+      flex: 0 0 auto;
+    }
+
+    .avatar-ring{
+      width: 64px;
+      height: 64px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 30%, rgba(255,46,166,.30), rgba(255,46,166,.10) 55%, rgba(255,46,166,0) 70%);
+      display: grid;
+      place-items: center;
+      flex: 0 0 auto;
+    }
 
     .hero-grid{
       display: grid;
@@ -580,7 +620,7 @@
   <header class="nav" role="banner">
     <div class="wrap nav-inner">
       <a class="brand" href="#top" aria-label="Home">
-        <span class="brand-mark" aria-hidden="true"></span>
+        <img class="nav-avatar" src="https://raw.githubusercontent.com/aminabennejma/-graph-ai-portfolio/refs/heads/main/Screenshot%202026-01-22%20at%2022.04.27.png" alt="Amina Ben Nejma" loading="eager" decoding="async" referrerpolicy="no-referrer" />
         <span>Amina Ben Nejma</span>
       </a>
 
@@ -629,7 +669,9 @@
     <section class="wrap hero" aria-label="Hero">
       <div class="hero-grid">
         <div class="hero-card">
-          <div class="kicker"><span class="dot" aria-hidden="true"></span><span data-i18n="hero_kicker">Generative AI for Work & Research</span></div>
+          <div class="hero-top">
+            <div class="kicker"><span class="dot" aria-hidden="true"></span><span data-i18n="hero_kicker">Generative AI for Work & Research</span></div>
+          </div>
           <h1 class="headline" data-i18n="hero_headline">BUILD. <span class="accent">LEARN.</span> SHIP.</h1>
           <p class="subhead" data-i18n="hero_subhead">A guided 8-week cohort where I build practical AI systems for work and research — weekly artifacts, feedback, and a capstone.</p>
           <ul class="hero-bullets" aria-label="Course snapshot">
