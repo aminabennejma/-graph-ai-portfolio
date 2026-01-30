@@ -630,10 +630,8 @@
         <a href="#weeks" data-i18n="nav_weeks">Weekly Submissions</a>
       </nav>
 
+      <!-- UPDATED: removed the two buttons ("About me" and "View work") -->
       <div class="nav-actions">
-        <a class="pill" href="#about" data-i18n="nav_about_btn">About me</a>
-        <a class="pill" href="#weeks" data-i18n="nav_view_work">View work</a>
-
         <div class="lang">
           <button class="pill" id="langBtn" aria-haspopup="true" aria-expanded="false">
             <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
@@ -898,7 +896,6 @@
           <article class="card week-card"><div class="pad">
             <div class="week-top">
               <span class="week-pill" data-i18n="w2_tag">Week 2</span>
-              <!-- NEW: Workshop 2 project link -->
               <a
                 class="ghost-btn"
                 href="https://github.com/aminabennejma/-graph-ai-portfolio/blob/main/Automated%20Data%20Analysis.pdf"
@@ -1485,7 +1482,7 @@
     function runTests(){
       try {
         const requiredKeys = [
-          'nav_about','nav_course','nav_weeks','nav_view_work','nav_about_btn',
+          'nav_about','nav_course','nav_weeks',
           'lang_label','lang_choose',
           'hero_kicker','hero_headline','hero_subhead','hero_cta_primary','hero_cta_secondary','hero_b1','hero_b2','hero_b3',
           'about_title','about_profile_text',
@@ -1520,4 +1517,5 @@
   </script>
 </body>
 </html>
+
 
