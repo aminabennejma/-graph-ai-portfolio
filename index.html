@@ -634,7 +634,6 @@
         <a href="#weeks" data-i18n="nav_weeks">Weekly Submissions</a>
       </nav>
 
-      <!-- UPDATED: removed the two buttons ("About me" and "View work") -->
       <div class="nav-actions">
         <div class="lang">
           <button class="pill" id="langBtn" aria-haspopup="true" aria-expanded="false">
@@ -913,13 +912,21 @@
             <p class="card-text" data-i18n="w2_text">Gapminder exploration: relationships between two global indicators using AI tools.</p>
           </div></article>
 
+          <!-- UPDATED: Week 3 now links to Workshop 3 report -->
           <article class="card week-card"><div class="pad">
             <div class="week-top">
               <span class="week-pill" data-i18n="w3_tag">Week 3</span>
-              <button class="ghost-btn" type="button" data-i18n="week_btn">Add link</button>
+              <a
+                class="ghost-btn"
+                href="https://github.com/aminabennejma/-graph-ai-portfolio/blob/main/Analyzing%20Job%20Market%20Data%20with%20LLMs%20in%20Sheets%20and%20AI%20Reporting%20Agents.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                data-i18n="w3_btn"
+                aria-label="Open Workshop 3 report (PDF)"
+              >View report</a>
             </div>
-            <h3 class="card-title" data-i18n="w3_title">Literature & text analysis</h3>
-            <p class="card-text" data-i18n="w3_text">Search → summarize → synthesize pipeline (responsible notes).</p>
+            <h3 class="card-title" data-i18n="w3_title">Workshop 3: Job Market Data Analysis</h3>
+            <p class="card-text" data-i18n="w3_text">Used LLMs in Google Sheets to extract info from job postings, then analyzed relationships between experience requirements, programming languages, and salaries.</p>
           </div></article>
 
           <article class="card week-card"><div class="pad">
@@ -1097,8 +1104,9 @@
         w2_text: "Gapminder exploration: relationships between two global indicators using AI tools.",
 
         w3_tag: "Week 3",
-        w3_title: "Literature & text analysis",
-        w3_text: "Search → summarize → synthesize pipeline (responsible notes).",
+        w3_btn: "View report",
+        w3_title: "Workshop 3: Job Market Data Analysis",
+        w3_text: "Used LLMs in Google Sheets to extract info from job postings, then analyzed relationships between experience requirements, programming languages, and salaries.",
 
         w4_tag: "Week 4",
         w4_title: "Custom GPT / chatbot",
@@ -1240,8 +1248,9 @@
         w2_text: "Gapminder-Analyse: Beziehungen zwischen zwei globalen Indikatoren mit KI-Tools.",
 
         w3_tag: "Woche 3",
-        w3_title: "Literatur & Textanalyse",
-        w3_text: "Search → Summarize → Synthesize Pipeline (responsible notes).",
+        w3_btn: "Report öffnen",
+        w3_title: "Workshop 3: Jobmarkt-Datenanalyse",
+        w3_text: "LLMs in Google Sheets genutzt, um Infos aus Stellenanzeigen zu extrahieren, und anschließend Zusammenhänge zwischen Erfahrung, Programmiersprachen und Gehältern analysiert.",
 
         w4_tag: "Woche 4",
         w4_title: "Custom GPT / Chatbot",
@@ -1383,8 +1392,9 @@
         w2_text: "Exploration Gapminder : relations entre deux indicateurs globaux avec des outils IA.",
 
         w3_tag: "Semaine 3",
-        w3_title: "Littérature & analyse de texte",
-        w3_text: "Pipeline rechercher → résumer → synthétiser (notes responsables).",
+        w3_btn: "Voir le rapport",
+        w3_title: "Atelier 3 : analyse du marché de l’emploi",
+        w3_text: "Utilisation de LLMs dans Google Sheets pour extraire des infos d’annonces, puis analyse des liens entre expérience demandée, langages de programmation et salaires.",
 
         w4_tag: "Semaine 4",
         w4_title: "Custom GPT / chatbot",
@@ -1521,5 +1531,6 @@
   </script>
 </body>
 </html>
+
 
 
