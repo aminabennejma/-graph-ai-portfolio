@@ -1,10 +1,9 @@
 <!doctype html>
 <html lang="en">
 <head>
-  
-    <script src="https://cdn.botpress.cloud/webchat/v3.6/inject.js"></script>
-<script src="https://files.bpcontent.cloud/2026/02/11/14/20260211143538-I9896E82.js" defer></script>
-    
+  <script src="https://cdn.botpress.cloud/webchat/v3.6/inject.js"></script>
+  <script src="https://files.bpcontent.cloud/2026/02/11/14/20260211143538-I9896E82.js" defer></script>
+
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Amina Ben Nejma — Generative AI for Work & Research</title>
@@ -573,6 +572,24 @@
     }
     .ghost-btn:hover{ border-color: rgba(255,46,166,.30); opacity: 1; }
 
+    /* Contact / embedded form */
+    .form-wrap{
+      border-radius: calc(var(--radius) + 10px);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      background: var(--surface);
+    }
+    .form-embed{
+      width: 100%;
+      height: 820px; /* desktop default */
+      border: 0;
+      display: block;
+    }
+    @media (max-width: 720px){
+      .form-embed{ height: 980px; }
+    }
+
     /* Footer */
     footer{
       padding: 36px 0 52px;
@@ -632,6 +649,7 @@
         <a href="#about" data-i18n="nav_about">About</a>
         <a href="#course" data-i18n="nav_course">Course</a>
         <a href="#weeks" data-i18n="nav_weeks">Weekly Submissions</a>
+        <a href="#contact" data-i18n="nav_contact">Consultation</a>
       </nav>
 
       <div class="nav-actions">
@@ -912,7 +930,6 @@
             <p class="card-text" data-i18n="w2_text">Gapminder exploration: relationships between two global indicators using AI tools.</p>
           </div></article>
 
-          <!-- UPDATED: Week 3 now links to Workshop 3 report -->
           <article class="card week-card"><div class="pad">
             <div class="week-top">
               <span class="week-pill" data-i18n="w3_tag">Week 3</span>
@@ -977,6 +994,29 @@
       </div>
     </section>
 
+    <!-- CONTACT FOR CONSULTATION -->
+    <section id="contact" class="section">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <h2 class="h2" data-i18n="contact_title">CONTACT FOR <span class="accent">CONSULTATION</span></h2>
+            <p class="lead" data-i18n="contact_lead">Use the form below to reach out for a consultation.</p>
+          </div>
+        </div>
+
+        <div class="form-wrap" aria-label="Consultation form">
+          <iframe
+            class="form-embed"
+            src="https://docs.google.com/forms/d/e/1FAIpQLScwu-DANiXRDUPLxS2YHJBrn1pbw3ppb6kd83BYTwVsbhnxCQ/viewform?embedded=true"
+            loading="lazy"
+            referrerpolicy="no-referrer"
+          >
+            Loading…
+          </iframe>
+        </div>
+      </div>
+    </section>
+
     <footer>
       <div class="wrap footer-inner">
         <span data-i18n="footer_left">© <span id="year"></span> Amina Ben Nejma • Portfolio</span>
@@ -992,6 +1032,7 @@
         nav_about: "About",
         nav_course: "Course",
         nav_weeks: "Weekly Submissions",
+        nav_contact: "Consultation",
         nav_view_work: "View work",
         nav_about_btn: "About me",
 
@@ -1128,6 +1169,9 @@
         w8_title: "Showcase",
         w8_text: "Final polish, demo narrative, and portfolio handoff.",
 
+        contact_title: "CONTACT FOR <span class=\"accent\">CONSULTATION</span>",
+        contact_lead: "Use the form below to reach out for a consultation.",
+
         footer_left: "© <span id=\"year\"></span> Amina Ben Nejma • Portfolio",
         footer_right: "No frameworks • Lightweight • Pink accents",
       },
@@ -1136,6 +1180,7 @@
         nav_about: "Über mich",
         nav_course: "Kurs",
         nav_weeks: "Wöchentliche Abgaben",
+        nav_contact: "Beratung",
         nav_view_work: "Arbeiten ansehen",
         nav_about_btn: "Über mich",
 
@@ -1272,6 +1317,9 @@
         w8_title: "Showcase",
         w8_text: "Finaler Feinschliff, Demo-Story und Portfolio-Handoff.",
 
+        contact_title: "KONTAKT FÜR <span class=\"accent\">BERATUNG</span>",
+        contact_lead: "Nutze das Formular unten, um mich für eine Beratung zu kontaktieren.",
+
         footer_left: "© <span id=\"year\"></span> Amina Ben Nejma • Portfolio",
         footer_right: "Keine Frameworks • Leichtgewichtig • Pinke Akzente",
       },
@@ -1280,6 +1328,7 @@
         nav_about: "À propos",
         nav_course: "Cours",
         nav_weeks: "Rendus hebdomadaires",
+        nav_contact: "Consultation",
         nav_view_work: "Voir mes rendus",
         nav_about_btn: "À propos de moi",
 
@@ -1416,6 +1465,9 @@
         w8_title: "Showcase",
         w8_text: "Polish final, narration de démo et livraison du portfolio.",
 
+        contact_title: "CONTACT POUR <span class=\"accent\">CONSULTATION</span>",
+        contact_lead: "Utilisez le formulaire ci-dessous pour me contacter pour une consultation.",
+
         footer_left: "© <span id=\"year\"></span> Amina Ben Nejma • Portfolio",
         footer_right: "Sans framework • Léger • Accents rose",
       }
@@ -1496,11 +1548,12 @@
     function runTests(){
       try {
         const requiredKeys = [
-          'nav_about','nav_course','nav_weeks',
+          'nav_about','nav_course','nav_weeks','nav_contact',
           'lang_label','lang_choose',
           'hero_kicker','hero_headline','hero_subhead','hero_cta_primary','hero_cta_secondary','hero_b1','hero_b2','hero_b3',
           'about_title','about_profile_text',
-          'course_title','weeks_title'
+          'course_title','weeks_title',
+          'contact_title','contact_lead'
         ];
 
         const langs = Object.keys(i18n);
@@ -1531,6 +1584,7 @@
   </script>
 </body>
 </html>
+
 
 
 
